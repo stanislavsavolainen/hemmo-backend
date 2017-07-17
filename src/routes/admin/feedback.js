@@ -6,6 +6,9 @@ import {
   getSingleFeedback,
   updateFeedback,
   delFeedback,
+  // my handler object (export functions from )
+  handler1,
+  handler2,
 } from '../../handlers/feedback';
 
 const feedbackId = {
@@ -81,6 +84,26 @@ const routeConfigs = [
       ...getAuthWithScope('admin'),
     },
   },
+
+  {
+    method: 'POST',
+    path: '/data_to_server1',
+    handler: handler1,
+  },
+  {
+    method: 'GET',
+    path: '/data_to_server2',
+    handler: handler2,
+  },
+  /* write data to postgres content table, when createContent handler function happen.
+     New version of backend have diffrent database so content table probaply isn't excisted anymore
+     
+  {
+    method: 'POST',
+    path: '/data_to_server3',
+    handler: createContent,
+  },
+*/
 ];
 
 export default routeConfigs;
