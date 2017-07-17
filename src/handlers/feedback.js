@@ -41,7 +41,7 @@ export const handler1 = (request, reply) => {
     console.log(request.payload[key]),
   );
 
-  return reply();
+  return reply(JSON.stringify('some-interesting-data1'));
 };
 
 export const handler2 = (request, reply) => {
@@ -58,13 +58,12 @@ export const handler2 = (request, reply) => {
   // for (const i in request.query) { console.log(`  ${i}`); }
 
   // payload  , request.params
-  return reply(JSON.stringify('some-interesting-data'));
+  return reply(JSON.stringify('some-interesting-data2'));
 };
 
-export const handler3 = (request, reply) => {
+export const handler3 = (request, reply) =>
   // containAndPaginate = knex function in this file only
 
   // dbCreateFeedback('b06650a9-adae-4356-805c-77bbfd319c04'); // foobar user-id
 
-  return reply();
-};
+  reply();
