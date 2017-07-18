@@ -8,7 +8,9 @@ import {
   dbCreateFeedback,
 } from '../models/feedback';
 
-import { countAndPaginate } from '../utils/db';
+import knex, { countAndPaginate } from '../utils/db';
+import uuid from 'uuid/v4';
+import { dbGetChild } from './children';
 
 export const getFeedback = (request, reply) =>
   countAndPaginate(
@@ -61,9 +63,40 @@ export const handler2 = (request, reply) => {
   return reply(JSON.stringify('some-interesting-data2'));
 };
 
-export const handler3 = (request, reply) =>
-  // containAndPaginate = knex function in this file only
+export const handler3 = (request, reply) => {
+  console.log('Handler 3 executed .');
 
-  // dbCreateFeedback('b06650a9-adae-4356-805c-77bbfd319c04'); // foobar user-id
+  console.log(`payload mood :${request.payload.mood}`);
+  console.log(`payload acitivity -> main : ${request.payload.activities.main}`);
+  console.log(`payload acitivity -> sub : ${request.payload.activities.sub}`);
+  console.log(`payload acitivity -> like : ${request.payload.activities.like}`);
 
-  reply();
+  Object.keys(request.payload).forEach(key =>
+    console.log(request.payload[key]),
+  );
+
+  console.log(
+    ` *******> ${request.payload.mood} , ${request.payload.activities
+      .main} , ${request.payload.activities.sub} , ${request.payload.activities
+      .like}`,
+  );
+
+  const childId = 'f0aef70f-0487-4d2f-9d3e-f9dfee4f3a5e';
+  // const child = dbGetChild(childId);
+
+  knex('feedback')
+    .insert({
+      id: uuid(),
+      childId,
+      // assigneeId: child.assigneeId,
+      activities: request.payload.activities,
+      moods: request.payload.mood,
+    })
+    .returning('*')
+    .then(results => results[0]);
+
+  return reply(JSON.stringify('123'));
+};
+// containAndPaginate = knex function in this file only
+
+// dbCreateFeedback('b06650a9-adae-4356-805c-77bbfd319c04'); // foobar user-id

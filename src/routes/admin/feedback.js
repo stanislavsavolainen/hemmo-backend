@@ -9,6 +9,7 @@ import {
   // my handler object (export functions from )
   handler1,
   handler2,
+  handler3,
 } from '../../handlers/feedback';
 
 const feedbackId = {
@@ -95,15 +96,11 @@ const routeConfigs = [
     path: '/data_to_server2',
     handler: handler2,
   },
-  /* write data to postgres content table, when createContent handler function happen.
-     New version of backend have diffrent database so content table probaply isn't excisted anymore
-     
   {
     method: 'POST',
     path: '/data_to_server3',
-    handler: createContent,
+    handler: handler3,
   },
-*/
 ];
 
 export default routeConfigs;
