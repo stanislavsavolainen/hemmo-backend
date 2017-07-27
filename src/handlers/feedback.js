@@ -6,6 +6,7 @@ import {
   dbDelFeedback,
   dbUpdateFeedback,
   dbCreateFeedback,
+  dbGetFeedbackGivenMoods,
 } from '../models/feedback';
 
 import knex, { countAndPaginate } from '../utils/db';
@@ -18,6 +19,14 @@ export const getFeedback = (request, reply) =>
     request.query.limit,
     request.query.offset,
   ).then(reply);
+
+export const getFeedbackGivenMoods = (request, reply) => {
+  countAndPaginate(
+    dbGetFeedbackGivenMoods(request.query),
+    request.query.limit,
+    request.query.offset,
+  ).then(reply);
+};
 
 export const getSingleFeedback = (request, reply) =>
   dbGetSingleFeedback(request.params.feedbackId).then(reply);
