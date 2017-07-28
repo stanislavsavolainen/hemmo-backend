@@ -52,7 +52,8 @@ export const handler1 = (request, reply) => {
     console.log(request.payload[key]),
   );
 
-  return reply(JSON.stringify('some-interesting-data1'));
+  //return reply(JSON.stringify('some-interesting-data1'));
+  return reply(JSON.stringify('------*****-----========'));
 };
 
 export const handler2 = (request, reply) => {
@@ -106,6 +107,18 @@ export const handler3 = (request, reply) => {
 
   return reply(JSON.stringify('123'));
 };
+
+export const handler4 = (request, reply) => {
+  let a = request.payload.data1;
+
+  console.log(
+    ' ******************************************************************************* handler 4 , and payload : ' +
+      a,
+  );
+
+  return reply(JSON.stringify('hanlder4'));
+};
+
 // containAndPaginate = knex function in this file only
 
 // dbCreateFeedback('b06650a9-adae-4356-805c-77bbfd319c04'); // foobar user-id
