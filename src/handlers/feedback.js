@@ -110,14 +110,28 @@ export const handler3 = (request, reply) => {
 
 export const handler4 = (request, reply) => {
   let a = request.payload.data1;
-
-  console.log(
-    ' ******************************************************************************* handler 4 , and payload : ' +
-      a,
-  );
-
-  return reply(JSON.stringify('hanlder4'));
+  console.log('********************** handler 4 , and payload : ' + a);
+  return reply(JSON.stringify('hanlder4 ' + a));
 };
+
+export const handler5 = (request, reply) => {
+  let a = request.payload.data1;
+
+  let myarray = [];
+  myarray = JSON.stringify(a).split(',');
+  //myarray = JSON.stringify(a);
+
+  console.log('--------> handler 5 ' + JSON.stringify(a));
+
+  console.log(' -> ' + myarray[5]);
+
+  for (let i = 0; i < myarray.length; i++)
+    console.log(i + ' :  ' + myarray[i].replace(/[^a-zA-Z0-9]/g, ''));
+
+  return reply(JSON.stringify('handler 5' + myarray));
+};
+
+export const handler6 = (request, reply) => {};
 
 // containAndPaginate = knex function in this file only
 

@@ -12,6 +12,8 @@ import {
   handler2,
   handler3,
   handler4,
+  handler5,
+  handler6,
 } from '../../handlers/feedback';
 
 const feedbackId = {
@@ -120,6 +122,18 @@ const routeConfigs = [
     method: 'POST',
     path: '/admin/link1',
     handler: handler4,
+  },
+
+  {
+    method: 'POST',
+    path: '/admin/link2',
+    handler: handler5,
+  },
+
+  {
+    method: 'GET',
+    path: '/admin/link3',
+    handler: handler6,
   },
 ];
 
