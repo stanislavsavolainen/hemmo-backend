@@ -125,6 +125,57 @@ export const handler5 = (request, reply) => {
 
   console.log(' -> ' + myarray[5]);
 
+  /*
+  address + @ + domain + . + lang 
+
+                              lang = com , org, fi
+
+  myaddress@domain.com
+
+a.com@myadress.b
+
+  email_mark = taulukko.split('@').length == 2
+  address = "myaddress@domain.com"
+  is_valid_address = address.match("[a-z0-9\._]+@[a-z0-9_]+\.[a-z0-9_]+") != null;
+
+  email_mark = false;
+  amout_of_marks = 0;
+for ( taulukko.lenght)
+  if(taulukko[indeksi] === "@") email_mark = true; amout_of_marks ++;
+
+
+if(e_mail && amout_of_marks === 1)
+
+
+  mark []= a, b, c  
+
+
+  var login_txt
+
+  if(login_txt.lenght > 6 && login_text.lenght < 20)
+
+
+    login : admin
+    password : ?????
+    
+    a-z A-Z 0-9   -> 50
+    aa
+
+    symbol = a .... z , A .... Z, 1 .... 9
+
+    50 exp 8   
+    temp_password += symbol
+
+    if( authenticate (temp_password) 
+
+password = "salasana"
+sha256(password + "12345zxfczxczxc")
+
+
+
+sha256(temp_password) == dbpassword
+*/
+
   //for (let i = 0; i < myarray.length; i++) console.log(i + ' :  ' + myarray[i].replace(/[^a-zA-Z0-9]/g, ''));
 
   return reply(JSON.stringify('handler 5' + myarray));
