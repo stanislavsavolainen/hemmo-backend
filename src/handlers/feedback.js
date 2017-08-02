@@ -121,12 +121,11 @@ export const handler5 = (request, reply) => {
   myarray = JSON.stringify(a).split(',');
   //myarray = JSON.stringify(a);
 
-  console.log('--------> handler 5 ' + JSON.stringify(a));
+  console.log('--------> handler 5 ' + JSON.stringify(a, null, 2));
 
   console.log(' -> ' + myarray[5]);
 
-  for (let i = 0; i < myarray.length; i++)
-    console.log(i + ' :  ' + myarray[i].replace(/[^a-zA-Z0-9]/g, ''));
+  //for (let i = 0; i < myarray.length; i++) console.log(i + ' :  ' + myarray[i].replace(/[^a-zA-Z0-9]/g, ''));
 
   return reply(JSON.stringify('handler 5' + myarray));
 };
