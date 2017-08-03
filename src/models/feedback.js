@@ -72,7 +72,7 @@ export const dbGetSingleFeedback = id =>
     ])
     .where({ 'feedback.id': id })
     .leftOuterJoin('children', 'feedback.childId', 'children.id')
-    .leftOuterJoin('employees', 'children.assigneeId', 'employees.id')
+    .leftOuterJoin('employees', 'feedback.assigneeId', 'employees.id')
     .leftOuterJoin(
       knex('attachments')
         .select(['id', 'mime', 'feedbackId'])
@@ -90,11 +90,14 @@ export const dbGetSingleFeedback = id =>
 
 export const dbDelFeedback = id => knex('feedback').del().where({ id });
 
-export const dbCreateFeedback = async childId => {
+export const dbCreateFeedback = async (childId, fields) => {
   const child = await dbGetChild(childId);
 
   return knex('feedback')
     .insert({
+      ...fields,
+      activities: fields.activities && JSON.stringify(fields.activities),
+      moods: fields.moods && JSON.stringify(fields.moods),
       id: uuid(),
       childId,
       assigneeId: child.assigneeId,
@@ -103,9 +106,16 @@ export const dbCreateFeedback = async childId => {
     .then(results => results[0]);
 };
 
-export const dbUpdateFeedback = (id, fields) =>
-  knex('feedback')
-    .update(fields)
+export const dbUpdateFeedback = async (id, fields) => {
+  const update = await knex('feedback')
+    .update({
+      ...fields,
+      activities: fields.activities && JSON.stringify(fields.activities),
+      moods: fields.moods && JSON.stringify(fields.moods),
+    })
     .where({ id })
     .returning('*')
     .then(results => results[0]);
+
+  return dbGetSingleFeedback(update.id);
+}
